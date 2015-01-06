@@ -96,7 +96,6 @@ func TestUnmarshalComplex(t *testing.T) {
 	}
 }
 
-// Can't import C in the test package, so this is how to test cgo code
 func TestUnmarshalUnknown(t *testing.T) {
 	// Test for nil (no value, pointer, or empty error)
 	var unk UnionSassValue
@@ -106,8 +105,6 @@ func TestUnmarshalUnknown(t *testing.T) {
 	if v != "<nil>" {
 		t.Error("non-nil returned")
 	}
-
-	// Need a test for non-supported type
 }
 
 func TestMarshalInvalidUnitSassNumber(t *testing.T) {
@@ -292,6 +289,18 @@ func TestMarshalUnsupportedStruct(t *testing.T) {
 
 	if !reflect.DeepEqual(expectedErr, err) {
 		t.Errorf("Marshalling of unsupported struct did not return an error")
+	}
+}
+
+func TestUnMarshalInvalidSassValueType(t *testing.T) {
+	c := 5
+	var ce float64
+
+	cm, _ := Marshal(c)
+	err := Unmarshal(cm, &ce)
+
+	if err.Error() != "Unsupported SassValue - Taylor Swift" {
+		t.Errorf("What the damn hell. Expected error: %#v\n", err.Error())
 	}
 }
 

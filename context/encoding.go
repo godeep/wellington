@@ -52,9 +52,7 @@ func unmarshal(arg UnionSassValue, v interface{}) error {
 
 	switch k {
 	default:
-		return errors.New("Unsupported SassValue")
-	case reflect.Invalid:
-		return errors.New("Invalid SASS Value - Taylor Swift")
+		return errors.New("Unsupported SassValue - Taylor Swift")
 	case reflect.String:
 		if C.sass_value_is_string(arg) || C.sass_value_is_error(arg) {
 			c := C.sass_string_get_value(arg)
