@@ -22,6 +22,7 @@ dependencies:
     - godep restore
   post:
     - cd $GO_LIBSASS; git submodule sync && git submodule update --init
+    - cd $GO_LIBSASS/libsass-src; git fetch --tags
     - cd $GO_LIBSASS; make deps #build libsass
 test:
   override:
