@@ -63,7 +63,7 @@ container-build:
 	- mkdir build
 	- rm profile.cov
 	docker build -t wt-build .
-	docker run -v $(PWD)/build:/tmp -e EUID=$(shell id -u) -e EGID=$(shell id -g) wt-build make copyout
+	docker run -v $(PWD)/../go-libsass /usr/src/github.com/wellington/go-libsass -v $(PWD)/build:/tmp -e EUID=$(shell id -u) -e EGID=$(shell id -g) wt-build make copyout
 
 build: container-build
 	cp Dockerfile.scratch build/Dockerfile
